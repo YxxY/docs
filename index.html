@@ -32,6 +32,18 @@
         previousText: '上一章节',
         nextText: '下一章节',
       },
+      formatUpdated: '{YYYY}-{MM}-{DD} {HH}:{mm}',
+      plugins: [
+        function (hook, vm) {
+          hook.beforeEach(function (html) {
+            var url = 'https://github.com/YxxY/docs/blob/gh-pages' + vm.route.file
+            var editHtml = '<span title="Last modified at"> ⏱️ </span> <code> {docsify-updated} </code> &nbsp;&nbsp;'
+              + '&nbsp;&nbsp;[📝 EDIT DOCUMENT](' + url + ')\n\n'
+
+            return editHtml + html
+          })
+        }
+      ]
     }
   </script>
   <script src="static/docsify.min.js"></script>
