@@ -1,0 +1,4 @@
+- [⬅️](/README)
+- **Common Sense**
+- [科学上网](common-sense/proxy)
+- [开源许可证](common-sense/license)

@@ -1,0 +1,9 @@
+- [⬅️](/README)
+- **MongoDB**
+    - [安装](mongodb/install)
+    - [配置](mongodb/config)
+    - [安全](mongodb/auth)
+    - [客户端连接](mongodb/mongo-shell)
+    - [导入和导出](mongodb/export)
+    - [重复文档](mongodb/duplicate)
+    - [索引](mongodb/create-index)

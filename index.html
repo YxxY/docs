@@ -37,7 +37,7 @@
         function (hook, vm) {
           hook.beforeEach(function (html) {
             var url = 'https://github.com/YxxY/docs/blob/gh-pages/' + vm.route.file
-            var editHtml = '<span title="Last modified at"> ⏱️ </span> <code> {docsify-updated} </code> &nbsp;&nbsp;'
+            var editHtml = '<span title="Last modified at"> ⌚ </span> <code> {docsify-updated} </code> &nbsp;&nbsp;'
               + '&nbsp;&nbsp;[📝 EDIT DOCUMENT](' + url + ')\n\n'
 
             return editHtml + html
