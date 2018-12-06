@@ -26,5 +26,5 @@ mongodb 原生提供命令行工具进行备份和导出工作
 > mongodump -h Host[:Port] -d Database [-c Collection] -o Output_dir --gzip 
 [-u "User" -p "Password" --authenticationDatabase "admin"]
 
-> mongorestore -h Host[:Port] --dir=Output_dir --gzip 
+> mongorestore -h Host[:Port] -d Database --dir=Output_dir --gzip 
 [-u "User" -p "Password" --authenticationDatabase "admin"]
