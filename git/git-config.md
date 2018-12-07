@@ -36,6 +36,22 @@ Git 自带一个 `git config` 的工具来帮助设置控制 Git 外观和行为
 
 !> 如果想针对特定项目使用不同的用户名称与邮件地址时，可以在那个项目目录下运行没有 --global 选项的命令来配置
 
+### 配置别名
+按照个人喜好添加别名，在对应配置文件中追加如下内容
+
+    [alias]
+	st = status
+    addd = add -A
+    cmt = commit -am
+    lg = log --pretty=format:'%C(auto) %h | %ai | %Cred %an %Cgreen %s'
+	ct = checkout 
+
+也可以通过命令行来配置
+    
+    git config --global alias.co checkout  
+    git config --global alias.br branch  
+
+
 ### 查看配置
 运行命令
 
