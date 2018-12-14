@@ -42,7 +42,7 @@ Git 自带一个 `git config` 的工具来帮助设置控制 Git 外观和行为
     [alias]
 	st = status
     addd = add -A
-    cmt = commit -am
+    cmt = commit
     lg = log --pretty=format:'%C(auto) %h | %ai | %Cred %an %Cgreen %s'
 	ct = checkout 
 
