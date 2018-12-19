@@ -31,7 +31,7 @@ git的原理仍然有点区别：
 如上所说，每一个版本都会存储当前文件的所有内容即一个快照。内容没有变化的的单个文件会存链接，指向之前的内容。  
 那如果新的版本相对旧版本，每个文件都做了一点点修改，就会存完整的两组文件。  
 但这样的存储方式不是很浪费内存么？  
-实际上Git 会做垃圾回收。原理也很简单，抽取两个内容相近对象的共同部分存在另外的位置（./.git/objects/pack）。    
+实际上Git 会做垃圾回收。原理也很简单，抽取并压缩两个内容相近对象的共同部分存在另外的位置（./.git/objects/pack）。    
 这里帖一个stackoverflow的问题 [how-does-git-store-files](https://stackoverflow.com/questions/8198105/how-does-git-store-files)
 
 ## 数据存储
