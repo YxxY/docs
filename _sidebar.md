@@ -1,5 +1,5 @@
 - [About This Site](README)
-<!-- - [常识](common-sense/proxy) -->
+- [Common Sense](common-sense/)
 - [Git](git/)
 - [Linux](linux/os)
 - [MongoDB](mongodb/install)
