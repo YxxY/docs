@@ -66,7 +66,9 @@ Unicode并不是具体的一种编码方式，通常我们看到的Unicode编码
 大多时候存储会选择UTF-16的编码方式，传输会选择UTF-8
 
 ### UTF-8
-UTF-8是Unicode编码方案的实现之一，使用最为广泛。其可变长编码的特点，可以节省空间，方便传输  
+UTF-16使用两个字节编码，基本能包含全世界所有的字符。 但是存储空间相对ASCII增加了一倍，显然这里是有很大的优化空间的  
+
+UTF-8 采用其可变长编码，对于单字节字符仍然保持单字节编码， 节省空间，方便传输， 也因此成为使用最广泛的Unicode编码方案  
 
 UTF-8编码的规则：
 - 对于单字节的符号，最高位为`0`，后7位为它的Unicode码，这里完全兼容ASCII
@@ -115,12 +117,12 @@ ANSI有很多套标准，会根据语言的不同具体的编码方式就会不�
 
 ## 聊聊乱码
 编码是将字符串根据字符集编码成对应的字符码加载到存储中  
-解码是将存储中的字节流根据字符集的规则解析
+解码是将存储中的字节流根据字符集的规则解析并显示成字符
 > 正确的逻辑是用合适的方式编码，再以相同方式解码，这样显示才不会乱码
 
 产生乱码的原因基本就两种：
-- 使用错误的字符集将给定字符编码成对应的字节
-- 使用错误的字符集解码字节成对应的字符
+- 使用错误的字符集将给定字符编码，这时一般会发生错误，比如用ASCII去编码中文
+- 使用错误的字符集解码字节流，这时得到的字符一般为乱码，如用UTF-8解码GBK编码的字节
 
 基于此通常会在文件开头标明编码方式，比如以HTML5的标准，html文件的头部的编码说明
 ```html
@@ -129,16 +131,154 @@ ANSI有很多套标准，会根据语言的不同具体的编码方式就会不�
 
 还有比如Python的起始前两行也会有编码方式的说明等
 
-当然除了以上说的都是“一把锁配一把钥匙”的做法，就是通常我们还需要动态转化的方式，那就是转码
+只要使用了正确的编码方式，那么以相同的方式解码就没有问题  
 
-### 转码
-转码就是把一种编码方式存储的字符串转成另一种方式存储
-比如现在用的最多的是UTF-8编码，可以借助编程语言，把其他非UTF-8编码的字符串转换成UTF-8  
+?> 对于编码问题带来的乱码问题，通常推荐 `Unicode三明治模型`的做法：
 
-> 其原理就是以UTF-16作为中间媒介，先以当前的编码方式解码成UTF-16，再选择新的编码方式重新编码  
+![unicode-sandwich-model](img/unicode-sandwich.png)
 
-<center>
+> 程序操作的永远都是字节流转换之后的unicode 字符串, 操作处理完成之后，仍旧转换成之前编码形式下的字节流
 
-![tanscoding](img/transcoding.png)
-</center>
+这里的Unicode 字符串，存储的时候仍然是字节，不过它是世界通用的 Unicode标准编码的字节，
+具体的编码实现可以是UTF-16 BE, 也可能是UTF-16 LE, 还可能是UTF-32, 会根据系统和平台而不同
+
+根据 Unicode 和其他各个编码标准之间的映射关系，以Unicode为中间媒介, 实现了编码的动态转换
+
+关于三明治模型几点补充：
+- input 阶段必须知道字节流的原始编码方式，才能正确转换成 Unicode 字节
+- output 阶段推荐的是转换成原始的编码方式，也可以动态的转换成其他的方式
+
+
+## Python 编码
+最后以python中的编码来举例验收，其实编码问题无关编程语言，只是Python2 和 python3比较方便举例  
+个人感觉只有弄清楚了python中的编码，其他编程语言是通用的
+
+`Python 2`中关于字符串相关的类型有两种：`str`和`unicode`  
+`Python 3`也是两种： `str` 和 `bytes`
+
+python 2和3 默认的字符串类型都是`str` 
+
+!> 不同的是python 2 的str具体编码方式随文件编码方式和系统而定， 默认是ASCII编码  
+python 3 的str默认Unicode编码方案，具体实现是UCS-2或UCS-4
+
+### Python 2
+#### str
+python 2 字符串类型是str， 在中文Windows平台默认编码是GBK， 因此以GBK的编码方式存储  
+此时的字符串更像是`字节串`, 使用`len()`函数得到的是`字节的长度`
+
+```python2
+>>> a = '你好'
+>>> a
+'\xc4\xe3\xba\xc3'
+>>> type(a)
+<type 'str'>
+>>> len(a)
+4
+```
+#### unicode
+字符串前加上`u`表明是Unicode字符串， 存储是会根据具体的实现去存
+```python2
+>>> a = u'你好'
+>>> a
+u'\u4f60\u597d'
+>>> type(a)
+<type 'unicode'>
+>>> len(a)
+2
+```
+u'你好' 等同于 u'\u4f60\u597d'
+```python2
+>>> a = u'\u4f60\u597d'
+>>> print a
+你好
+>>> type(a)
+<type 'unicode'>
+>>> u'你好' == u'\u4f60\u597d'
+True
+>>> u'你好' is u'\u4f60\u597d'
+True
+```
+这里的is相等是由于`字符串驻留`（this is another topic :)），但也间接说明他们确实是同一字符串，
+这个有助于理解Unicode String在内存里的对象形态
+#### str to unicode
+str 到 unicode 类型的转换，如同Unicode三明治模型里说表示的  
+input时根据编码类型decode成Unicode Strings
+
+```python2
+>>> a = '你好'
+>>> b = a.decode('gbk')
+>>> type(b)
+<type 'unicode'>
+>>> b
+u'\u4f60\u597d'
+>>> print b
+你好
+```
+#### unicode to str
+如果有输出，转换编码可以调用encode方法  
+```python2
+>>> a = '你好'
+>>> b = a.decode('gbk')
+>>> c = b.encode('gbk')
+>>> c
+'\xc4\xe3\xba\xc3'
+>>> print c
+你好
+>>> d = b.encode('utf-8')
+>>> d
+'\xe4\xbd\xa0\xe5\xa5\xbd'
+>>> print d
+浣犲ソ
+```
+d 之所以是乱码是因为控制台的编码方式是GBK，它会尝试以GBK的方式去解码UTF-8编码生成的6个字节，
+因此产生了3个不相符的字符  
+这仅仅是巧合，刚好字符码处于两个字符集的交叉位置，如果字符码在字符集里不存在，那么解码时会报`decode error`
+
+### Python 3
+#### str
+python 3的str默认就是Unicode 字符串, 如同python 2里的Unicode类型字符串，前置的标识`u`字母可省略
+```python3
+>>> a = '你好'
+>>> a
+'你好'
+>>> type(a)
+<class 'str'>
+>>> len(a)
+2
+```
+
+#### bytes
+新增了bytes类型，前置字母`b`表示python 2中的字节串  
+
+```python3
+>>> b =b'abc'
+>>> b
+b'abc'
+>>> type(b)
+<class 'bytes'>
+```
+> 注意 `'abc'` 和 `b'abc'`的区别， 虽然他们的值相等， 但是后者存储时每个字符仅占一个字节， 前者如果是UTF-16方案实现，每个字符会占用两个字节
+
+这一点在python2中也一样
+```python3
+>>> 'abc' == b'abc'
+False
+>>> 'abc' is b'abc'
+False
+```
+
+str类型和bytes类型的相互转化, 依然采用三明治模型的方法
+```python3
+>>> a = '你好'
+>>> b = a.encode('gbk')
+>>> type(b)
+<class 'bytes'>
+>>>
+>>> c = b.decode('gbk')
+>>> c
+'你好'
+>>> type(c)
+<class 'str'>
+```
+
 
