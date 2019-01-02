@@ -1,3 +1,3 @@
 - [⬅️](/README)
-- [*Java*](java/)
+- [**Java**](java/)
 - [Maven](java/maven)
