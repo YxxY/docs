@@ -3,3 +3,4 @@
 - [科学上网](common-sense/v2ray)
 - [开源许可证](common-sense/license)
 - [字符编码](common-sense/char-encoding)
+- [免密ssh登陆](common-sense/ssh)
