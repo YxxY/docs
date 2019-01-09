@@ -20,7 +20,7 @@ linux 作为一个多人多任务系统，用户管理不可或缺，如何做�
 ### 删除用户
 
 ### 用户授权
-
+usermod -aG wheel username
 
 
 
