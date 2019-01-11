@@ -48,3 +48,86 @@ eg：删除所有仓库名为redis的镜像
 
 
 ## 定制镜像
+通常使用`Dockerfile`来定制镜像，dockerfile里包含了构建镜像的一条条指令(Instruction), 会按照指令的顺序分成构建  
+
+可参考[Dockerfile 编写官方最佳实践](https://docs.docker.com/develop/develop-images/dockerfile_best-practices/)
+
+示例如下：
+```dockerfile
+FROM ubuntu:15.04
+COPY . /app
+RUN make /app
+CMD python /app/app.py
+```
+之前说过镜像是分层存储的  
+这里每一条指令构建一个只读层，按顺序堆叠，后一层是前一层的增量
+
+- `FROM` 定义基础镜像，空镜像的抽象关键字为`scratch`
+- `COPY` 把当前目录的文件拷贝到容器内的目录
+- `RUN` 构建应用
+- `CMD` 在容器内执行命令
+
+dockerfile的语法和shell很相似  
+- `#` 注释
+- `\` 换行
+- `&&` 串联命令
+
+## 构建镜像
+有了Dockerfile，在当前目录执行`docker build`就可以构建镜像了
+
+    docker build -t my_image:v1 .
+- `-t` 参数是打个标签，给该镜像命名， 当然也可以指定其他参数
+- `.` 表示当前目录， 是构建的上下文路径
+
+### Build Context
+构建上下文(Build Context) 是一个很重要的概念  
+但是如果Dockerfile， 源文件，以及构建上下文都在同一目录，那么背后的原理也无关紧要  
+
+当它们在不同目录时，可以使用`-f`参数指定  
+> docker build -f `docker_file_path` `context_path`
+
+上下文路径会影响指令的参数， 以`COPY`举例：  
+> COPY `<src>`... `dest`
+
+- src 可以是具体的文件或文件夹，它们的**路径都是相对于构建上下文**的
+- dest 是一个绝对路径或者是`WORKDIR`的相对路径，是对应容器内的路径
+    - 末尾如果不带`\`， 会被认为是一个文件
+    - 如果dest 不存在，所有的缺省目录会在拷贝时创建
+
+### Docker Build
+docker 运行时分为 docker engine (daemon)和 docker client  
+docker engine 提供了一套REST API，也被称为 `Docker Remote API`, client 就是通过这套API 和 engine 交互的， 本质上是C/S架构的  
+
+`docker build`命令构建镜像时，并非在本地构建， 而是调用API
+
+会将上下文路径下的所有内容打包，上传给Docker engine构建生成镜像  
+实际构建时，也会看到一条如下打印，佐证该行为  
+> Sending build context to Docker daemon  xxx
+
+
+再回头看下`COPY`命令  
+    
+    COPY . /app
+
+这里的`.` 并非指docker build 执行时的当前目录，而是指上下文目录  
+所以不能写成`COPY ../ /app`， 这就超出了上下文的范围，无法操作  
+
+在例子里，这俩刚好是同一目录，实际使用时也推荐这种方式，可以减少路径错误的产生
+
+
+
+## 导入/导出
+一般是通过仓库上传和下载镜像，但有时也需要手动传输
+
+导出镜像
+> docker image [option] <Image> [Image ...]
+
+
+
+
+
+
+
+
+
+
