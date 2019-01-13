@@ -32,5 +32,13 @@
 ## 进入容器
 `docker exec -it <container> bash` 可以进入一个正在运行的容器并打开bash  
 
+## 删除容器
+容器状态必须为终止状态才能删除  
+`docker container rm <container>` 来删除一个终止状态的容器  
+
+批量删除所有处于终止状态的容器  
+
+    docker container prune
+
 
 

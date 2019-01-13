@@ -120,8 +120,10 @@ docker engine 提供了一套REST API，也被称为 `Docker Remote API`, client
 一般是通过仓库上传和下载镜像，但有时也需要手动传输
 
 导出镜像
-> docker image [option] <Image> [Image ...]
+> `docker save -o <file_name.tar> <Image> [Image ...]`
 
+导入镜像
+> `docker load -i <file_name>
 
 
 
