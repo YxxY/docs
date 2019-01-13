@@ -37,7 +37,7 @@
 
 
 ## 删除镜像
-> docker image rm image1
+> docker image rm Image [Image...]
 
 image1 可以是 短ID(3位及以上)、长ID、仓库名 或者 镜像摘要
 
@@ -48,6 +48,7 @@ eg：删除所有仓库名为redis的镜像
 
 
 ## 定制镜像
+### Dockerfile
 通常使用`Dockerfile`来定制镜像，dockerfile里包含了构建镜像的一条条指令(Instruction), 会按照指令的顺序分成构建  
 
 可参考[Dockerfile 编写官方最佳实践](https://docs.docker.com/develop/develop-images/dockerfile_best-practices/)
@@ -71,6 +72,9 @@ dockerfile的语法和shell很相似
 - `#` 注释
 - `\` 换行
 - `&&` 串联命令
+
+### .dockerignore
+类似`.gitignore`的作用，可以避免把本地文件拷贝到 Docker 镜像中
 
 ## 构建镜像
 有了Dockerfile，在当前目录执行`docker build`就可以构建镜像了
@@ -113,7 +117,6 @@ docker engine 提供了一套REST API，也被称为 `Docker Remote API`, client
 所以不能写成`COPY ../ /app`， 这就超出了上下文的范围，无法操作  
 
 在例子里，这俩刚好是同一目录，实际使用时也推荐这种方式，可以减少路径错误的产生
-
 
 
 ## 导入/导出
