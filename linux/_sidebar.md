@@ -5,6 +5,7 @@
     - [用户 & 群组](linux/user-management)
     - [文件 & 文件夹]()
     - [压缩文件]()
+    - [定时任务](linux/cron)
 - **Tips**
     - [守护进程的启动方法](linux/daemon)
     - [标准I/O的重定向](linux/stdio-redirect)
