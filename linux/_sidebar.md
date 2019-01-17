@@ -1,10 +1,9 @@
 - [⬅️](/README)
-- **Linux**
+- [Linux](linux/)
 - [操作系统](linux/os)
 - **Linux基础**
     - [用户 & 群组](linux/user-management)
-    - [文件 & 文件夹]()
-    - [压缩文件]()
+    - [文件操作]()
     - [定时任务](linux/cron)
 - **Tips**
     - [守护进程的启动方法](linux/daemon)

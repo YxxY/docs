@@ -1,6 +1,6 @@
 - [About This Site](README)
 - [Common Sense](common-sense/)
 - [Git](git/)
-- [Linux](linux/os)
+- [Linux](linux/)
 - [Docker](docker/)
 - [MongoDB](mongodb/install)

@@ -20,7 +20,7 @@
       autoHeader: false,
       subMaxLevel: 3,
       maxLevel: 4,
-      executeScript: true,
+      executeScript: false,
       name: 'Blue-Pen',
       repo: "https://github.com/YxxY/docs",
       search: {
@@ -32,14 +32,14 @@
         previousText: '上一章节',
         nextText: '下一章节',
       },
-      formatUpdated: '{YYYY}-{MM}-{DD} {HH}:{mm}',
+      // formatUpdated: '{YYYY}-{MM}-{DD} {HH}:{mm}',
       plugins: [
         function (hook, vm) {
           hook.beforeEach(function (html) {
             var url = 'https://github.com/YxxY/docs/blob/gh-pages/' + vm.route.file
-            var editHtml = '<span title="Last modified at"> ⌚ </span> <code> {docsify-updated} </code> &nbsp;&nbsp;'
-              + '&nbsp;&nbsp;[📝 EDIT DOCUMENT](' + url + ')\n\n'
-
+            // var editHtml = '<span title="Last modified at"> ⌚ </span> <code> {docsify-updated} </code> &nbsp;&nbsp;'
+            //   + '&nbsp;&nbsp;[📝 EDIT DOCUMENT](' + url + ')\n\n'
+            var editHtml = '[📝 EDIT DOCUMENT](' + url + ') \n\n'
             return editHtml + html
           })
         }
