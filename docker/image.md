@@ -4,7 +4,7 @@
 |list|`docker image ls` |列出镜像|  
 |tag|docker tag image username/repo:tag |eg: docker tag friendlyhello yxxy/lib:test1  |
 |login| docker login [registry]| 默认登陆docker hub， 也可以指定登陆其他registry|
-|push| docker push username/repo:tag| repo不存在会创建，上传的镜像会被压缩，eg: docker push yxxy/lib:test1|
+|push| docker push username/repo:tag| repo不存在会创建，上传的镜像会被压缩，eg: docker push yxxy/my_app:test1|
 |delete|docker image rm [option] image1 [image...] | 删除本地镜像|
 
 ## 列出镜像
@@ -119,14 +119,25 @@ docker engine 提供了一套REST API，也被称为 `Docker Remote API`, client
 在例子里，这俩刚好是同一目录，实际使用时也推荐这种方式，可以减少路径错误的产生
 
 
+## 推送/拉取
+通过镜像仓库的中转，完成镜像的 push/pull 操作
+- 推送
+    - 先打便签，给本地镜像加上命名空间，官方仓库的就为DockerHub 账号，私有仓库的命令规则也类似
+        以默认仓库为例，执行打标签命令
+        `docker tag <IMAGE_NAME> <YOUR_DOCKERHUB_NAME>/<IMAGE_NAME>`
+    - 推送到远程仓库
+        `docker push <YOUR_DOCKERHUB_NAME>/<IMAGE_NAME>`
+- 拉取
+    - 同推送类似，指定命令空间和镜像名
+        `docker pull <repo>/<image>`
+
 ## 导入/导出
-一般是通过仓库上传和下载镜像，但有时也需要手动传输
+无法联网就无法使用镜像仓库，这时可以手动传输
 
-导出镜像
-> `docker save -o <file_name.tar> <Image> [Image ...]`
-
-导入镜像
-> `docker load -i <file_name>
+- 导出镜像
+    `docker save -o <file_name.tar> <Image> [Image ...]`
+- 导入镜像
+    `docker load -i <file_name>`
 
 
 

@@ -65,6 +65,7 @@ docker 命令会使用 Unix socket 与 Docker 引擎通讯。而只有 root 用�
 一般不推荐直接使用root用户，推荐的做法是将用户加到docker用户组
 
         sudo usermod -aG docker your-user
+**重新登陆后生效**
 
 ## 通过安装包安装
 如果不能联网，只能手动通过下载安装包安装了, 
@@ -74,6 +75,7 @@ docker 命令会使用 Unix socket 与 Docker 引擎通讯。而只有 root 用�
         sudo yum install /path/to/package.rpm
 - 同上，docker安装成功但未启动，创建了一个空的 docker任务组。
 - 后续更新版本，下载新版本的安装包，使用 `yum upgrade /path/to/package.rpm`即可
+
 ## 自动化脚本安装
 一键式脚本安装,也需要联网，一般是在测试和开发环境这么做
 - 下载安装脚本
@@ -83,43 +85,6 @@ docker 命令会使用 Unix socket 与 Docker 引擎通讯。而只有 root 用�
         
         sudo sh get-docker.sh
 
-## 配置代理
-docker 启动后是一个守护进程，如果是通过代理联网，docker pull可能会失败  
-需要添加代理，参考 [proxy](https://docs.docker.com/config/daemon/systemd/#httphttps-proxy)
 
-原理是给该守护进程定义环境变量`HTTP_PROXY`或者`HTTPS_PROXY`
-- 创建文件夹
-
-    sudo mkdir -p /etc/systemd/system/docker.service.d
-- 在该目录下创建文件`http-proxy.conf`  
-    - 内容示例
-                
-            [Service]
-            Environment="HTTP_PROXY=http://proxy.example.com:80/"
-    - 如果某些地址不需要代理，可以设置为
-
-            [Service]    
-            Environment="HTTP_PROXY=https://proxy.example.com:443/" "NO_PROXY=localhost,127.0.0.1,docker-registry.somecorporation.com"
-
-- 如果用的是https代理，需再创建一个文件`https-proxy.conf`, 对应环境变量名称为`HTTPS_PROXY`
-<!-- 参考[network-proxy](https://docs.docker.com/network/proxy/#configure-the-docker-client) -->
-
-- 配置完成重启服务生效
-    - 使配置生效
-                
-            sudo systemctl daemon-reload
-    - 重启docker
-                
-            sudo systemctl restart docker
-- 查询代理配置
-    - 查看环境变量
-
-            systemctl show --property=Environment docker
-    - 查看进程信息
-
-            docker info
-
-- 验证安装成功, 拉取镜像并运行
-
-        docker run hello-world
-
+## 启动
+docker 安装后并未启动，需手动启动 `sudo systemctl start docker`

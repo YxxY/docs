@@ -9,6 +9,8 @@
 - `--interactive` | `-i`, 始终打开容器的标准输入，就算没有分配也能用
 - `--detach` | `-d`, 后台运行并打印容器ID
 - `--publish` | `-p`, `<host_port>:<docker_port>` 将容器的端口映射到宿主机上
+- `--volume` |  `-v`, 挂载目录
+- `-e` |  `--env` |  `--env-file`, 命令行参数设置环境变量
 - `--rm`, 退出后自动删除
 - `--workdir` | `-w`， 在容器内指定工作目录
 - `--restart`， 退出自动重启
@@ -47,5 +49,4 @@
 
     docker container prune
 
-
-
+## 挂载目录
