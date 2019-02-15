@@ -14,12 +14,14 @@ windows用户下载安装包安装,官方下载地址[http://git-scm.com/downloa
 
 Git 自带一个 `git config` 的工具来帮助设置控制 Git 外观和行为的配置变量。   
 这些变量存储在三个不同的位置：
-- `/etc/gitconfig` 文件: 包含系统上每一个用户及他们仓库的通用配置。 如果使用带有 `--system` 选项的 git config 时，它会从此文件读写配置变量。
-- `~/.gitconfig` or  `~/.config/git/config` 文件：只针对当前用户。 
-    可以传递`--global` 选项让 Git 读写此文件。
-- `.git/config`当前使用仓库的 Git 目录中的 config 文件：针对该仓库。
+- `/etc/gitconfig` 文件，对系统上每一个用户及他们的所有仓库均生效
+    - 使用时带 `--system` 选项，它会从此文件读写配置变量
+- `~/.gitconfig` or  `~/.config/git/config` 文件，**只针对当前用户生效**
+    - 传递`--global` 选项让 Git 读写此文件
+- `.git/config`当前使用仓库的 Git 目录中的 config 文件，**只针对当前仓库生效**
+    - 使用时不带任何参数选项
 
-!> 每一个级别覆盖上一级别的配置，所以 .git/config 的配置变量会覆盖 /etc/gitconfig 中的配置变量。
+!> 每一个级别覆盖上一级别的配置，所以 `.git/config` 的配置变量会覆盖 `/etc/gitconfig` 中的配置变量。
 
 ?> 在 Windows 系统中，Git 会查找 $HOME 目录下（一般情况下是 `C:\Users\$USER`）的 .gitconfig 文件。   
 
