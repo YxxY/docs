@@ -15,7 +15,7 @@
 示例
 1. 创建目录`/data/logs`, `/data/mongodb`
     
-        cd /; mkdir -p /data/logs /data/mongodb; cd /
+        sudo mkdir -p /data/logs /data/mongodb
 2. 以后台任务启动mongodb server
 
         mongod --logpath /data/logs/mongod.log --dbpath /data/mongodb/ &
