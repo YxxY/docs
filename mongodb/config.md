@@ -16,7 +16,9 @@
 1. 创建目录`/data/logs`, `/data/mongodb`
     
         sudo mkdir -p /data/logs /data/mongodb
-2. 以后台任务启动mongodb server
+2. 更改目录权限
+        sudo chown `userName`:`groupName` /data/logs /data/mongodb
+3. 以后台任务启动mongodb server
 
         mongod --logpath /data/logs/mongod.log --dbpath /data/mongodb/ &
 
@@ -73,7 +75,7 @@ net:
 - 安全问题参考[下一章](linux/auth)
 - 停止当前程序，切换到普通用户重新启动
     - mongod -f /path/to/mongod.conf  --shutdown
-    - 修改目录权限， chmod 777 -R data/
+    - 修改目录权限
     - 以普通用户启动 mongod -f /path/to/mongod.conf 
 - 运行
 ```shell
