@@ -8,4 +8,4 @@
     - [守护进程的启动](linux/daemon)
     - [标准I/O的重定向](linux/stdio-redirect)
 - **Tips**
-    - [基本操作最佳实践](linux/basic)
+    - [基本操作一页纸](linux/basic)

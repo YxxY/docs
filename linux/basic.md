@@ -1,5 +1,5 @@
 ## 命令行帮助
-> `COMMAND` --help
+> `COMMAND` --help  
 > man `COMMAND`
 
 ## 命令行快捷键
@@ -55,9 +55,9 @@ export https_proxy=https://user:password@proxyserver.com:port
 - `-n，--line-number`, 显示行号
 - `-w, --word-regexp`, 全词匹配
 - `-m, --max-count=NUM`, 只匹配前 NUM 个结果
-- `B, --before-context=NUM`, 同时打印匹配结果的前 NUM 行
-- `A, --after-context=NUM`,  同时打印匹配结果的后 NUM 行
-- `C, --context=NUM`,  同时打印匹配结果的前后 NUM 行
+- `-B, --before-context=NUM`, 同时打印匹配结果的前 NUM 行
+- `-A, --after-context=NUM`,  同时打印匹配结果的后 NUM 行
+- `-C, --context=NUM`,  同时打印匹配结果的前后 NUM 行
 - `-P`, 支持perl风格的正则表达式，即现在常用风格的正则
 
 ## 查看端口
@@ -66,7 +66,7 @@ export https_proxy=https://user:password@proxyserver.com:port
 查看所有已打开的端口  
 > netsat -anp
 
-- `-a， --all`, 列出所有connected端口
+- `-a， --all`, 列出所有开放的端口
 - `-l, --listening`, 列出所有监听状态的端口
 - `-n, --numeric`, 不解析主机，端口，用户名，仅显示数字
 - `-p, --programs`, 显示 进程/程序 名
@@ -76,30 +76,61 @@ export https_proxy=https://user:password@proxyserver.com:port
 - `-c, --continuous`, 持续查询，每秒更新
 
 ## 查看硬盘空间
-> df [OPTION]... [FILE]... (disk free)
+> df [OPTION]... [FILE]... (disk free)  
 > du [OPTION]... [FILE]... (disk usage)
 
 - 查看磁盘总的使用情况
-    - `df -h`
+    - `df -h` (`-h, --human-readable`)
 - 查看当前位置所有文件占用总大小
-    - `du -sh`
+    - `du -sh`(`-s, --summarize`)
 -  查看所有子文件的大小
-    - `du -h -d 1 .`, `-d` 表示嵌套层级
+    - `du -h -d 1 .`, `-d, --max-depth=N` 表示嵌套层级
     - `du -d 1 . | sort -n`, 从小到大排序
     - `du -d 1 . | sort -nr`, 从大到小排序
 
 df是直接从文件系统返回磁盘的使用情况，du是按照文件层级遍历文件计算大小并求和
 
 ## 查看进程
-> ps [options] (processes)
+> ps [options] (processes)  
 > top -hv | -bcHiOSs -d secs -n max -u|U user -p pid(s) -o field -w [cols]
 
-ps命令返回当前进程信息的快照， top则显示动态更新的信息
+ps命令返回当前进程信息的快照， top则显示动态更新的信息  
+
+ps 常用 options  
+ps 的查询支持多种风格显示，一般以`-`起始的选项是指定Unix风格，直接是字母的选项是BSD风格，不建议混用  
+仅以Unix风格举例：  
+- `-e, -A`, 包含所有进程
+- `-f`, 全格式列表，可以跟其他Unix风格的选项组合使用，添加更多的显示字段
+    如与 `-L` 组合可以增加显示`NLWP`(线程数)以及`LWP`(线程ID)
+- `-p, --pid`, 指定进程ID列表，逗号分隔
+- `-u, --user`, 指定用户列表，通用的跟`用户名`，多个用户使用`逗号分隔`
+- `--ppid`, 指定父进程ID列表，逗号分隔
+- `-o`， 使用用户指定的输出格式
+    - `ps -p <pid> -o %cpu %mem etime cmd` 查看指定进程的cpu，内存，启动时间，启动命令
+    - 使用 `-O` 除了用户自定义输出格式，会有一些默认字段， 等同于`-o pid,<format>,tname,time,cmd`
+- `--sort [+|-]key[,[+|-]key[,...]].`, 输出结果根据特定字段排序
+    - eg: `ps -e -O %cpu,%mem,etime --sort -%mem`, 显示当前所有进程信息，指定输出字段，并按照内存使用逆向排序（从大到小）
 
 
-## 文本替换
-- 在 vi/vim 中替换
-    - `:s/old/new/`, 将第一个 old 替换为 new 
-    - `:s/old/new/g`, 将所有的 old 替换为 new 
-- `sed` (stream editor)， 对一个输入流（文件或输入管道）进行过滤和转换操作
+## 解压/解压
+> tar [OPTION...] [FILE]...  
+
+示例：  
+- `tar -cf archive.tar foo bar`  # Create archive.tar from files foo and bar.
+    - 等同于 `tar -f archive.tar -c foo bar`
+- `tar -tvf archive.tar`         # List all files in archive.tar verbosely.
+- `tar -xf archive.tar`          # Extract all files from archive.tar.
+- `tar -zxf archive.tar.gz -C /path/to/newDir/`   # Extract all files from archive.tar.gz to newDir.
+
+tar 常用option选项  
+- `-c, --create`, 创建一个新压缩包（仅将文件打包，并未压缩体积）
+- `-f, --file=ARCHIVE`, 指定要使用的压缩包
+- `-t, --list`, 列出压缩包里包含的文件名
+- ` -x, --extract, --get`, 解压缩包
+- `-C, --directory=DIR`, 改变解压缩的路径
+- `-z, --gzip`, 以`gzip` 的方式处理压缩包（创建和解压通用）
+- `-J, --xz`, 以`xz` 的方式处理压缩包
+- `-u, --update`, 增量添加内容进压缩包
+- `-v, --verbose`, 显示详细的操作过程
+- `--skip-old-files`, 解压时跳过存在的同名文件（默认覆盖）
 
