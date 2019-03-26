@@ -46,7 +46,7 @@ See crontab(1) for more information
 |`0  4  1  1  *`|  1 月 1 日早上 4 点|
 
 ## 环境变量
-定时任务执行时，当前进程的环境变量会失效，如果要使用到，需要手动指明
+定时任务执行时，无法使用默认shell的环境变量，如果要使用到，需要手动指明
 
     *  *  *  *  * . /path/to/.profile; command to be executed
 
