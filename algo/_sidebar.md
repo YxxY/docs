@@ -1,0 +1,3 @@
+- [⬅️](/README)
+- [three Sum](algo/three-sum)
+- [Array Splice](algo/array-splice)
