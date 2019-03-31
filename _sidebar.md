@@ -1,5 +1,6 @@
 - [About This Site](README)
 - [Common Sense](common-sense/)
+- [Programming](programming/)
 - [Git](git/)
 - [Linux](linux/)
 - [Docker](docker/)

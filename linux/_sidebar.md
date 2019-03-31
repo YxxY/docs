@@ -3,7 +3,6 @@
 - [操作系统](linux/os)
 - **Linux基础**
     - [用户 & 群组](linux/user-management)
-    - [文件操作]()
     - [定时任务](linux/cron)
     - [守护进程的启动](linux/daemon)
     - [标准I/O的重定向](linux/stdio-redirect)

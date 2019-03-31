@@ -23,6 +23,7 @@ linux 作为一个多人多任务系统，用户管理和权限划分不可或�
     `useradd <user_name>`   
 - 新增用户组
     `groupadd <group_name>`
+
 ### password
 `passwd` 命令
 - 设置用户密码  
@@ -37,8 +38,8 @@ linux 作为一个多人多任务系统，用户管理和权限划分不可或�
 
 ### Modify
 使用`usermod`命令
-- 授予管理员权限
-    `usermod -aG wheel <username>`
+- 授予管理员权限(加到管理员组)
+    `usermod -aG wheel|sudo <username>`
 
 
 
