@@ -4,6 +4,7 @@
 这个我很久之前就看到了，不知道他们什么时候还重构了一次，因此我现在有两个版本了
 
 > version 1
+
 ```js
 function spliceOne(list, index) {
   for (var i = index, k = i + 1, n = list.length; k < n; i += 1, k += 1)
@@ -13,6 +14,7 @@ function spliceOne(list, index) {
 ```
 
 > version 2
+
 ```js
 function spliceOne(list, index) {
   for (; index + 1 < list.length; index++)
