@@ -39,6 +39,9 @@ export https_proxy=https://user:password@proxyserver.com:port
 结合管道(`|`)还可以对结果进行截取
 - `OUTPUT | head`, 取输出的前10行
 
+组合使用，查看文件第 M 到 N 行的内容
+- `tail -n +M | head -n N`
+
 ## 关键字搜索
 > `grep [OPTION]... PATTERN [FILE]...`  
 
