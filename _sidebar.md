@@ -1,6 +1,6 @@
 - [About This Site](README)
 - [Common Sense](common-sense/)
-- [algo](algo/)
+- [Algo](algo/)
 - [Programming](programming/)
 - [Git](git/)
 - [Linux](linux/)
