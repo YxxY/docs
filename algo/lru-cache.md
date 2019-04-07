@@ -21,7 +21,13 @@ cache.get(1);       // returns -1 (not found)
 cache.get(3);       // returns 3
 cache.get(4);       // returns 4
 ```
+---
 
+> 难点分析  
+
+- 怎么找出LRU 的key-value，且满足最小复杂度要求
+
+---
 
 js 版本实现
 

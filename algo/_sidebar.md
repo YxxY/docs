@@ -3,3 +3,4 @@
 - [Array Sort](algo/array-sort)
 - [Array Splice](algo/array-splice)
 - [LRU Cache](algo/lru-cache)
+- [Candy](algo/candy)
