@@ -83,3 +83,4 @@ LRUCache.prototype.put = function(key, value) {
 
 看了下效率最高的答案，关键点是使用了`new Map().keys()` 返回一个迭代器，迭代按顺序插入的key值  
 每次将使用到的key 删掉再重新插入，就能自维护一个顺序列表。需要释放的时候永远释放第一个key（map.keys().next().value）即可，是真正意义上的O(1) 算法
+
