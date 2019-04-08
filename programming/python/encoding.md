@@ -158,3 +158,17 @@ str类型和bytes类型的相互转化, 依然采用三明治模型的方法
 >>> type(c)
 <class 'str'>
 ```
+
+
+## 编码声明
+说了这么多，补充一点python文件开头的编码声明的作用
+
+一般在文件开头处，形如  
+```python
+# coding=utf-8
+```
+
+如果不写这一行声明，文件会以ASCII编码方式解码，当存在非ASCII字符时，会报错  
+> SyntaxError: Non-ASCII character
+
+如果声明和实际编码方式不符，则可能导致乱码或者报错

@@ -1,0 +1,2 @@
+- [⬅️](programming/python/)
+- [List](programming/python/data-structure/list)
