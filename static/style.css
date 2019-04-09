@@ -291,7 +291,7 @@ section.cover .cover-main {
 
 .markdown-section code {
     display: inline-block;
-    font-family: 'Source Code Pro', monospace;
+    font-family: Consolas, monospace, serif;
 }
 
 .markdown-section pre {
@@ -381,9 +381,10 @@ section.cover .cover-main {
 
 .markdown-section code {
     /* color: inherit; */
-    border-radius: 0;
+    border-radius: 3px;
     font-size: 0.9em;
-    padding: 6px 10px;
+    padding: 3px 5px;
+    margin: 1px 2px;
     /* color: #111; */
 }
 
@@ -441,42 +442,52 @@ section.cover .cover-main {
     section.cover {
         height: auto;
     }
+
     section.cover .cover-main {
         margin: 0 5vw;
     }
+
     .cover-main img {
         max-width: 100px;
         max-height: 100px;
     }
+
     body .sidebar-toggle {
         background-color: #fff;
     }
+
     body.close .sidebar-toggle {
         background-color: transparent;
         padding: 1rem;
     }
+
     .sidebar-toggle:hover span:nth-child(1) {
         transform: rotate(0);
         width: 1.5rem;
         top: 0.65rem;
     }
+
     .sidebar-toggle:hover span:nth-child(2) {
         opacity: 1;
         transform: rotate(90deg);
         transform-origin: center;
     }
+
     .sidebar-toggle:hover span:nth-child(3) {
         transform: rotate(0);
         width: 1.5rem;
         top: 0.65rem;
     }
+
     .close .sidebar-toggle:hover span:nth-child(1) {
         transform: rotate(45deg);
         width: 1.75rem;
     }
+
     .close .sidebar-toggle:hover span:nth-child(2) {
         opacity: 0;
     }
+
     .close .sidebar-toggle:hover span:nth-child(3) {
         transform: rotate(-45deg);
         width: 1.75rem;
