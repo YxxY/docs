@@ -6,5 +6,7 @@
     - [定时任务](linux/cron)
     - [守护进程的启动](linux/daemon)
     - [标准I/O的重定向](linux/stdio-redirect)
+    - [文件链接](linux/link)
+    - [Proc目录](linux/proc)
 - **Tips**
     - [基本操作一页纸](linux/basic)
