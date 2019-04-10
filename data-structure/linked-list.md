@@ -102,6 +102,8 @@ def delete(self, index):
 - 如果是头节点，则 next->None
 - 如果是尾节点，则 head->curr
 
+因为反转之后位置没有发生变化，因此可以两个一组递归实现反转
+
 ```python
 def __reversed__(self):
     def reverse(pre_node, node):

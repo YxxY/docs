@@ -1,7 +1,7 @@
 - [About This Site](README)
 - [Common Sense](common-sense/)
 - [Algo](algo/)
-- [Data Structure](data-structure/bst)
+- [Data Structure](data-structure/linked-list)
 - [Programming](programming/)
 - [Git](git/)
 - [Linux](linux/)
