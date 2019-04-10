@@ -128,3 +128,38 @@ def top_to_buttom(root):
         if root.right != None:
             q.append(root.right)
 ```
+
+### 二叉树高度
+二叉树的高度或者说深度，即根节点到最远叶子节点的距离  
+计算二叉树高度很显然是二叉树遍历的一个子命题
+
+两种实现方式：
+1. 从上往下递归，按照遍历的思想，从所有根节点到叶子节点中取最大距离
+2. 从下往上递归，每个节点返回左右子节点长度的最大值
+
+实现1
+```python
+MAX = 0
+CURR = 0
+def root_to_leaf(root):
+    if root is None:
+        return
+    CURR += 1
+    root_to_leaf(root.left)
+    MAX = CURR if CURR > MAX
+    root_to_leaf(root.right)
+    MAX = CURR if CURR > MAX
+    CURR -= 1
+```
+
+实现2
+```python
+def leaf_to_root(root):
+    if root is None:
+        return 0
+    left = leaf_to_root(root.left) + 1
+    right = leaf_to_root(root.right) + 1
+    return left if left > right else right
+```
+两种方法复杂度是相同的，都是一次遍历得出结果，但是实现思想有差异
+

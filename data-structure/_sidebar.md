@@ -1,3 +1,4 @@
 - [⬅️](/README)
+- [链表](data-structure/linked-list)
 - [二叉树](data-structure/bst)
 - [平衡二叉树](data-structure/balanced-bst)
