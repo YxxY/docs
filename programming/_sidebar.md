@@ -1,2 +1,4 @@
 - [⬅️](/README)
 - [Python](programming/python/)
+- [Node.js](programming/nodejs/)
+- [Java](programming/java/)

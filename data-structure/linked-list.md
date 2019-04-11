@@ -4,7 +4,7 @@
 跟数组很像，但相比数组能更高效利用存储空间，增加节点和删除节点更方便  
 但是获取节点元素没有数组直接根据索引来的便捷
 
-## 链表实现
+链表结构实现
 ```python
 class Node(object):
     def __init__(self, data):
@@ -19,7 +19,7 @@ class LinkedList(object):
     # implement menthod
 ```
 
-### 添加节点
+## 添加节点
 ```python
 def append(self, node):
     if not isinstance(node, Node):
@@ -32,7 +32,7 @@ def append(self, node):
             head = head.next
         head.next = node
 ```
-### 获取链表长度
+## 获取链表长度
 ```python
 def __len__(self):
     curr = self.head
@@ -41,7 +41,7 @@ def __len__(self):
         curr = curr.next
     return self._length
 ```
-### 格式化输出
+## 格式化输出
 ```python
 def __str__(self):
     curr = self.head
@@ -56,7 +56,7 @@ def __str__(self):
 def __repr__(self):
     return self.__str__()
 ```
-### 插入节点
+## 插入节点
 ```python
 def insert(self, index, node):
     if abs(index+1) > len(self):
@@ -76,7 +76,7 @@ def insert(self, index, node):
         node.next = next_node
     return True
 ```    
-### 删除节点
+## 删除节点
 假设要删除的节点为curr_node, 它的前一个节点为pre_node  
 那么满足 `pre_node.next = curr_node.next` 即可，当然要考虑head节点的特殊情况
 ```python
@@ -96,7 +96,7 @@ def delete(self, index):
         pre.next = curr.next
     return True
 ```
-### 反转链表
+## 反转链表
 反转即实现以下逻辑
 - curr->next 变为 next->curr
 - 如果是头节点，则 next->None
