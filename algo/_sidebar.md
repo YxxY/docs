@@ -1,6 +1,6 @@
 - [⬅️](/README)
-- [three Sum](algo/three-sum)
-- [Array Sort](algo/array-sort)
+- [Sort](algo/sort/)
+- [Three Sum](algo/three-sum)
 - [Array Splice](algo/array-splice)
 - [LRU Cache](algo/lru-cache)
 - [Candy](algo/candy)
