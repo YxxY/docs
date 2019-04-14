@@ -3,7 +3,7 @@
 具备的特征是
 - 每个节点至多有两个子节点, 也可以没有子节点
 - 子节点分左子节点（Left subtree）和右子节点（right subtree）
-- 左子节点的值必须大于根节点，右子节点的值必须大于根节点
+- 左子节点的值必须**小于**根节点，右子节点的值必须**大于**根节点
 
 ```
     root
@@ -40,19 +40,19 @@ class BinaryTree(object):
             root = self.nodes[0]
             while(True):
                 if node.value < root.value:
-                    if root.left != None:
-                        root = root.left
-                    else:
+                    if root.left == None:
                         root.left = node
                         self.nodes.append(node)
                         return True
-                elif node.value > root.value
-                    if root.right != None:
-                        root = root.right
                     else:
+                        root = root.left
+                elif node.value > root.value
+                    if root.right == None:
                         root.right = node
                         self.nodes.append(node)
                         return True
+                    else:
+                        root = root.right
                 else:
                     return False
 

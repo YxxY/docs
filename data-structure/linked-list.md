@@ -1,5 +1,8 @@
 链表(linked-list) 是一种动态数据结构
-特点是由多个节点组成，每个节点包括存储的数据以及指向下一个节点的指针， 理论上可以无限扩展
+特点是
+- 由多个节点组成，仅记录头部节点的位置
+- 每个节点包括存储的数据以及指向下一个节点的指针
+- 理论上可以无限扩展
 
 跟数组很像，但相比数组能更高效利用存储空间，增加节点和删除节点更方便  
 但是获取节点元素没有数组直接根据索引来的便捷
@@ -41,6 +44,7 @@ def __len__(self):
         curr = curr.next
     return self._length
 ```
+
 ## 格式化输出
 ```python
 def __str__(self):
@@ -98,9 +102,9 @@ def delete(self, index):
 ```
 ## 反转链表
 反转即实现以下逻辑
-- curr->next 变为 next->curr
-- 如果是头节点，则 next->None
-- 如果是尾节点，则 head->curr
+- curr_node -> next_node 变为 next_node -> curr_node
+- 如果是curr_node 是头节点，则 curr_node.next -> None
+- 如果是curr_node 是尾节点，则 `head` -> curr_node
 
 因为反转之后位置没有发生变化，因此可以两个一组递归实现反转
 
