@@ -10,7 +10,7 @@
 const arr = [ 5,18,27,33,42,66,90,8,81,47,13,67,9,36,62,22]
 
 const bucket_sort = function (arr){
-    ret = []
+    const ret = []
     // 造10个桶
     for(let i =0; i<10;i++){
         ret[i] = []
