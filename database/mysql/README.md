@@ -1,3 +1,3 @@
 - [键](database/mysql/key)
 - [索引](database/mysql/index)
-- [事物](database/mysql/transaction)
+- [事务](database/mysql/transaction)
