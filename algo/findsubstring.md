@@ -24,7 +24,7 @@ const findSubString = function(str){
     	if(arr[i] === arr[i-1]){
 	        let len = i - start - 1
 	        if(len > max){
-	        	max = end
+	        	max = len
 		        ret = arr.slice(start, i-1).join('')
 	        }
 	        while(arr[i+1] === arr[i] && i<arr.length-2){
