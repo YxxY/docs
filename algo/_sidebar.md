@@ -4,3 +4,4 @@
 - [Array Splice](algo/array-splice)
 - [LRU Cache](algo/lru-cache)
 - [Candy](algo/candy)
+- [Sub-string](algo/findsubstring)
