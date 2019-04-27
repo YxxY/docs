@@ -136,3 +136,12 @@ tar 常用option选项
 - `-v, --verbose`, 显示详细的操作过程
 - `--skip-old-files`, 解压时跳过存在的同名文件（默认覆盖）
 
+## 模拟http请求
+> curl [options...] <url>
+
+示例：
+- `curl http://locahost:3000`  默认发生 `GET` 请求
+- `curl -I <url>`, 仅显示响应体
+- `curl -H "Content-Type:application/json" -X POST -d '{"start":"2019-04-01","end":"2019-04-26"}' <url>`
+    `-H` 指定请求头， `-X` 指定请求方法， `-d` 指定请求体参数
+
