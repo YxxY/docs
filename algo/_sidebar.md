@@ -5,3 +5,4 @@
 - [LRU Cache](algo/lru-cache)
 - [Candy](algo/candy)
 - [Sub-string](algo/findsubstring)
+- [Flat-JSON](algo/flat-json)
