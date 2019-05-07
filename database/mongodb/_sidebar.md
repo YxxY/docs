@@ -6,4 +6,5 @@
 - [客户端连接](database/mongodb/mongo-shell)
 - [导入和导出](database/mongodb/export)
 - [重复文档](database/mongodb/duplicate)
-- [索引](database/mongodb/create-index)
+- [索引](database/mongodb/indexes)
+- [集群](database/mongodb/replication)
