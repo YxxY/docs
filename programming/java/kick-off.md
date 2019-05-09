@@ -22,11 +22,14 @@ Java 是一门编程语言。经从这个方面说，Java没啥特殊，提供�
 - 类(`class`) 是一等公民，相对的，而在动态语言中，函数(`function`)是一等公民
     - 一个文件里可以有多个类，但只能存在一个 `public`的类
     - public 类名**必须** 和 文件名保持一致
-    - 执行时，只需指定入口类名（对应例子中 java Test 的执行)
+    - 执行时，参数是入口**类名**（对应例子中 java Test 的执行)
+- javac：java 编译器，将源码文件(.java)编译为字节码文件(.class)
+- java：启动 JVM 执行字节码
+
 
 ## 基础语法
 
 - 大小写敏感
 - 类名应该首字母大写，多个单词时，一般采用驼峰式(camel-style)命名
 - 源文件名需要和类名保持一一致，否则会出现编译错误
-- 主方法入口为 `public static void main(String args[])`
+- 类主方法入口为 `public static void main(String args[])`
