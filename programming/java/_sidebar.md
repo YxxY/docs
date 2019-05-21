@@ -1,3 +1,6 @@
 - [⬅️](/programming/)
-- **Java**
-- [入门](programming/java/kick-off)
+- **Java 基础**
+    - [安装JDK](programming/java/install)
+    - [修饰符](programming/java/modifer)
+    - [package](programming/java/package)
+- [Maven](programming/java/maven)
