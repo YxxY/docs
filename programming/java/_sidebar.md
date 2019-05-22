@@ -2,5 +2,6 @@
 - **Java 基础**
     - [安装JDK](programming/java/install)
     - [修饰符](programming/java/modifer)
-    - [package](programming/java/package)
+    - [数据类型](programming/java/data-type/primitive-type)
+    - [包机制](programming/java/package)
 - [Maven](programming/java/maven)

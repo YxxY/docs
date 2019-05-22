@@ -62,6 +62,7 @@ export https_proxy=https://user:password@proxyserver.com:port
 - `-A, --after-context=NUM`,  同时打印匹配结果的后 NUM 行
 - `-C, --context=NUM`,  同时打印匹配结果的前后 NUM 行
 - `-P`, 支持perl风格的正则表达式，即现在常用风格的正则
+- `-v`, 不包括，过滤掉后续 pattern的内容
 
 ## 查看端口
 > netstat  
