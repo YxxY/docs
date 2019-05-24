@@ -44,7 +44,9 @@ Strng name = "hello world";
     ```java
     if(str != null && str.length != 0)... //判断非空且非null
     ```
+    
 ## 构造字符串
+
 由于字符串对象的不可变特性，字符串拼接时都会产生新的字符串对象，这样做即浪费空间，效率也不高。    
 针对这类问题，解决方案是使用 `StringBuilder`类来构造字符串。
 ```java
