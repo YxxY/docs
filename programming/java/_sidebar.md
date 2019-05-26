@@ -4,4 +4,7 @@
     - [修饰符](programming/java/modifer)
     - [数据类型](programming/java/data-type/primitive-type)
     - [包机制](programming/java/package)
+    - [类](programming/java/class)
+    - [继承](programming/java/inheritance)
+    - [接口](programming/java/interface)
 - [Maven](programming/java/maven)

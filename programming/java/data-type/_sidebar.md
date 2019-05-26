@@ -1,6 +1,7 @@
 - [⬅️](/programming/java/)
 - **数据类型**
     - [基本数据类型](programming/java/data-type/primitive-type)
+    - [大数值](programming/java/data-type/big-integer)
     - [字符串](programming/java/data-type/string)
     - [数组](programming/java/data-type/array)
     - [列表](programming/java/data-type/list)
