@@ -5,3 +5,4 @@
     - [字符串](programming/java/data-type/string)
     - [数组](programming/java/data-type/array)
     - [列表](programming/java/data-type/list)
+    - [集合](programming/java/data-type/collection)
