@@ -4,3 +4,4 @@
 - [开源许可证](common-sense/license)
 - [字符编码](common-sense/char-encoding)
 - [一键ssh登陆](common-sense/ssh)
+- [windows使用技巧](common-sense/windows)
