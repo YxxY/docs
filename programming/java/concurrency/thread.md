@@ -1,8 +1,8 @@
 线程(thread)和进程(process)的概念不在赘述。
 
 
-## 构造线程类
-Java 中提供`java.lang.Thread`类来构造和使用多线程
+## 构造线程对象
+Java 中提供`java.lang.Thread`类来构造和使用线程
 - Thread(Runnable target), 构建新线程 
 - void start(), 启动新线程，调用run()方法，并发执行
 - void join(), 等待线程结束
@@ -67,7 +67,136 @@ A:4
 ```
 上面的举例是标准的构建线程类对象的方法，当然也可以直接从 Thread类继承，然后编写 run方法，
 最后调用 start方法启动线程。但这种方法不推荐使用。因为这样将要执行的任务和线程类强耦合在一起。
-每一个线程任务都需要写一个 Thread 子类，不是很直观。
+每一个线程任务都需要写一个 Thread 子类，不方便也不符合直觉。
+
+## 线程状态
+线程有 6种状态：`New`, `Runnable`, `Blocked`, `Waiting`, `Timed waiting`, `Terminated`
+
+- 通过 new 操作符，创建一个 Thread对象时，线程就处于新建(New)状态，还未执行
+- 执行 start方法，线程处于可运行(Runnable)状态。注意，可运行不代表正在运行，是否运行
+    取决于操作系统是否给线程提供运行时间，Java规范没有给正在运行的线程单独分配状态。
+- 线程开始运行后不必始终保持运行。线程是可以被中断的，目的是给其它线程提供运行机会。  
+- 当一个线程试图获取内部对象锁，而该锁被其它线程持有时，线程进入阻塞(Blocked)状态。  
+    当所有其它线程释放该锁，且线程调度器允许本线程持有该锁时，该线程恢复可运行状态
+- 线程有几个方法带有超时参数，例如 Thread.sleep, Thread.join等方法，调用会让线程进入计时等待状态。
+- 当线程等待另一个线程时的某一结果时，它自己进入等待状态。例如几个线程都调用 Thread.join 方法，那么
+    完成任务的线程即进入等待状态。
+- 线程终止状态有两种情况。一是运行结束，正常终止。另外就是被一个没有捕获的异常中止。
+
+线程状态之间的转换关系如下图：
+![thread-state](../img/thread-state.png)
+
+可以调用用线程 `getState()`方法获取线程状态，返回值为 Thread.State对象
+
+## 线程属性
+线程有多个属性，包括： 线程优先级，是否为守护线程等
+### 线程优先级
+Java 中的每一个线程都有一个优先级。默认情况是继承父线程的优先级值。
+较高优先级的线程会优先获取调度器的资源。  
+可以调用线程实例方法 `setPriority`设置任何一个线程的优先级。  
+优先级值范围是 1-10，`MIN_PRIORITY`定义为 1，`NORM_PRIORITY`定义为 5， `MAX_PRIORITY`为 10.  
+
+但线程的优先级是高度依赖操作系统的，Java的优先级机制最后会被映射到宿主机平台的优先级上。
+
+### 守护线程
+调用线程实例方法 `setDaemon(true)`可以让一个线程转换为守护线程。但守护线程不同于守护进程。  
+守护线程的唯一用途是给其它线程提供服务，例如定时发送计时信号给其它线程。  
+
+### 未捕获异常处理器
+线程的run方法调用过程中如果出现未捕获异常会导致线程终止。  
+可以提供调用线程实例方法 `setUncaughtExceptionHandler`为线程安装一个异常处理器，
+也可以用线程静态方法 `setDefaultUncaughtExceptionHandler`，给所有线程实例设置一个默认处理器。  
+如果不安装处理器，默认为空。
 
 
+## 多线程同步
+多线程操作时是无法保证执行顺序的，然而有一些连续操作是必须被同步执行的，否则的话会产生不可预知的错误。  
+举例来说，存钱和取钱，假设原账户有 1000块钱，存取各一个线程，每次存取10块。存取各操作 10000次，
+理论上余额应该还是 1000块的。
+
+实现上就写一个单例类，多线程反复操作它的对象增和减方法，如下：
+```java
+
+class Singleton {   
+    private static Singleton obj = new Singleton(1000);
+    private int total;
+    private Singleton(int init) {
+    	total = init;
+    }
+    public void increment(int num){
+    	total += num;
+    }
+    public void decrement(int num){
+    	total -= num;
+    }
+    public int getTotal(){
+    	return total;
+    }
+    public static Singleton getSingleton(){
+        return obj;
+    }
+}
+
+class Increment implements Runnable{
+	private Singleton obj;
+	private int num;
+	private int loop;
+	public Increment(Singleton init, int num, int loop){
+		obj = init;
+		this.num = num;
+		this.loop = loop;
+	}
+	public void run(){
+		for(int i=0; i<loop; i++){
+			obj.increment(num);
+			try {
+	            Thread.sleep((int) Math.random() * 10);
+	        } catch (InterruptedException e) {
+	            e.printStackTrace();
+        	}
+		}
+	}
+}
+
+class Decrement implements Runnable{
+	private Singleton obj;
+	private int num;
+	private int loop;
+
+	public Decrement(Singleton init, int num, int loop){
+		obj = init;
+		this.num = num;
+		this.loop = loop;
+	}
+
+	public void run(){
+		for(int i=0; i<loop; i++){
+			obj.decrement(num);
+			try {
+	            Thread.sleep((int) Math.random() * 10);
+	        } catch (InterruptedException e) {
+	            e.printStackTrace();
+        	}
+		}
+	}
+}
+
+public class MultiThreadWithoutLock{
+
+	public static void main(String[] args) throws InterruptedException{
+		Singleton obj = Singleton.getSingleton();
+		Thread t1 = new Thread(new Increment(obj, 10, 10000));
+		Thread t2 = new Thread(new Decrement(obj, 10, 10000));
+		System.out.println(obj.getTotal());  //1000
+		t1.start();
+		t2.start();
+		t1.join();
+		t2.join();
+		System.out.println(obj.getTotal());  // mot 1000
+	}
+}
+
+```
+
+虽然循环次数越大，离预期值差距越大。
 
