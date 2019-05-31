@@ -1,4 +1,10 @@
-Java 数组, 标准类里存在 `java.util.Arrays`类， 提供了很多静态方法可以使用
+数组在 Java里也是一个对象。  
+
+    In the Java programming language, arrays are objects (§4.3.1), are dynamically created, and may be assigned to variables of type Object (§4.3.2). All methods of class Object may be invoked on an array
+
+重点关注的是， 数组对象是由 JVM动态生成的，创造它的父类是 Object，因此它也包含 Object类实例的所有方法。 
+
+标准类里存在 `java.util.Arrays`类， 提供了很多静态方法可以操作数组对象。
 
 ## 数组声明
 ```java
@@ -43,19 +49,11 @@ for(String element : a){
 }
 ```
 
-## 数组拷贝
-- 如果是将一个数组变量拷贝给另一个，因为数组是引用类型，那么改变指向就可以
-- 如果是将一个数组的所有值拷贝到新的数组中，即产生新的数组，可以使用`Arrays.copyOf`方法
-    ```java
-    int[] copiedArr = Arrays.copyOf(arr, arr.length);
-    //第二个参数是新数组的长度，
-    //如果该长度大于被拷贝的数组长度，多余项会被置默认值，通常用来扩充数组
-    //如果该长度小于被拷贝数组长度，那么只会拷贝前面的值
-    ```
-    
-## 常用方法
+## 常用 Arrays静态方法
 - `Arrays.toString(type[] arr)`  
-    打印数组，返回一个包含数组元素的字符串
+    定制字符串打印，比数组对象的 toString方法好用，返回一个包含数组元素的字符串
+- `Arrays.copyOf(type[] arr, int len)`
+    深拷贝数组。第二个参数是新数组的长度。
 - `Arrays.sort(type[] arr)`  
     数组类型为基本数据类型，实现从小到大排序。该方法使用优化了优化的快排算法
 - `Arrays.fill(type[] arr, type v)`   
