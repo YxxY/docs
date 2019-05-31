@@ -7,7 +7,7 @@
     - [泛型](programming/java/generic-type)
     - [类](programming/java/class)
     - [继承](programming/java/inheritance)
-    - [反射](programming/java/concurrency/reflection)
+    - [反射](programming/java/reflection)
     - [接口](programming/java/interface)
     - [并发](programming/java/concurrency/thread)
 - [Maven](programming/java/maven)
