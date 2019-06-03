@@ -18,7 +18,9 @@ public interface Iterable<E>{
 
 注意到 iterator方法返回的是一个`Iterator`对象，该对象是实现了同名接口的对象，也被
 称为`迭代器`。
+
 ### Iterator 接口
+`java.util.Iterator<E>`类实现了该接口，
 `Iterator`接口包含 3个抽象方法和一个默认方法。
 ```java
 public interface Iterator<E>{
@@ -31,10 +33,8 @@ public interface Iterator<E>{
 - 提供反复调用 `next`方法，可以逐个访问集合中的元素。  
     但是如果已经遍历到最后一个元素后，继续调用 next会抛出 `NoSuchElementException`异常
 - `hasNext`方法是判断是否存在下一个元素，存在返回 true。可以配合 next方法使用。  
-- `remove`方法是用来删除上一个 next返回的元素。  
-    因为迭代器没有提供索引的功能，因此要删除一个元素必须先“越过”它。
-
-> `java.util.Iterator<E>`类实现了该接口
+- `remove`方法调用之前，必须调用 next方法，否则会抛出 `IllegalStateException`异常。  
+    因为迭代器没有提供索引的功能，因此要删除一个元素必须先“越过”它，该方法删除的是上一个 next返回的元素。  
 
 ### Collection 接口
 这个接口即为 Java集合类的基本接口，**它时对 Iterable接口的扩展**
@@ -47,7 +47,7 @@ public interface Collection<E>{
     boolean contains();
     boolean equals(Object other);
     boolean remove(Object other);
-    void clean();
+    void clear();
     Object[] toArray();
     //...other methods
 }
@@ -62,21 +62,34 @@ public interface Collection<E>{
 > `java.util.Collection<E>`类实现了该接口
 
 ### Collection 子接口
+
 #### List
-List 是有序集合(ordered collection), 元素增加到特定位置。  
-可以采用迭代器范围元素，或者根据一个整数索引来访问，后者成为随机访问(random access)。  
-因此 List接口需要定义用于随机访问的额外方法。  
-`java.util.List`等类实现了该接口。
+List 是**有序集合**(ordered collection), 元素增加到特定位置。  
+`java.util.List`等类实现了该接口。    
+访问元素方法：
+- 顺序访问，使用迭代器
+- 随机访问(random access), 根据索引快速访问
+
+实现随机访问 List接口定义了用于随机访问的额外方法：
+- `E get(int index)`
+- `E set(int index, E element)`
+
+Java SE 1.4 引入一个标记接口 `RandomAccess`，该接口不包含任何方法，但可以测试集合是否支持高效的随机访问。
+```java
+if( c instanceof RandomAccess){
+    //use randowm access algorithm
+}else{
+    //use sequential access algorithm
+}
+```
+比如链表也是有序集合，但随机访问很慢，最好使用迭代器便利
 
 #### Set
-Set 等同与 Collection, 但有更严格的定义。其 add方法不允许添加重复元素。  
+Set 是**无序不重复集合**。其 add方法不允许添加重复元素。  
 因此它的 `equals`和 `hashCode`方法需要按照元素相等的规则适当定义。  
 `java.util.Set`等类实现了该接口。
 
 #### Queue
 队列也是一种集合。它规定从尾部添加元素，从头部删除元素。内部元素需符合“先进先出”的规则。  
 `java.util.ArrayDeque`等类实现了该接口
-
-## Map
-Java 类库中的集合，以 Map结尾的类实现了 Map接口。其它的类都实现了 Collection接口
 
