@@ -33,21 +33,21 @@ Class cls3 = Double[].class;
 
 !> 一个 Class对象代表一种类型，这个类型未必是一种类(int 不是类，但int.class 是一个 Class类型对象)
 
-## reflection 框架
+## reflect 框架
 回顾一下，运行时获取对象类型的方式有：
 - 通过运行时对象`getClass`方法或者具体类型的`class`属性，可以返回它的类型对象(java.lang.Class)
 - 通过类名,使用`Class.forName(String name)`方法动态加载对应的类
 
-得到类对象后，就可以获取它的构造器，属性，方法, 对应的修饰符以及父类信息了, 分别对应reflection 框架里的
-`java.lang.reflection.Constructor`,
-`java.lang.reflection.Field`,
-`java.lang.reflection.Method`,
-`java.lang.reflection.Modifier`类。
+得到类对象后，就可以获取它的构造器，属性，方法, 对应的修饰符以及父类信息了, 分别对应 reflect框架里的
+`java.lang.reflect.Constructor`,
+`java.lang.reflect.Field`,
+`java.lang.reflect.Method`,
+`java.lang.reflect.Modifier`类。
 
 运用这些类，可以在运行时分析类，动态的创建类和对象，功能十分强大。
 
-### reflection.Array 类
-reflection框架中还存在一个数组类 `java.lang.reflection.Array`。可以动态操作数组对象
+### reflect.Array 类
+reflect框架中还存在一个数组类 `java.lang.reflect.Array`。可以动态操作数组对象
 - `static Object get(Object array, int index)`
 - `static int getLength()`
 - `static void set(Object array, int index, Object newValue)`
