@@ -20,8 +20,7 @@ public interface Iterable<E>{
 称为`迭代器`。
 
 ### Iterator 接口
-`java.util.Iterator<E>`类实现了该接口，
-`Iterator`接口包含 3个抽象方法和一个默认方法。
+`java.util.Iterator<E>`接口包含 3个抽象方法和一个默认方法。
 ```java
 public interface Iterator<E>{
     E next();
@@ -37,7 +36,7 @@ public interface Iterator<E>{
     因为迭代器没有提供索引的功能，因此要删除一个元素必须先“越过”它，该方法删除的是上一个 next返回的元素。  
 
 ### Collection 接口
-这个接口即为 Java集合类的基本接口，**它时对 Iterable接口的扩展**
+`java.util.Collection<E>`接口即为 Java集合类的基本接口，**它时对 Iterable接口的扩展**
 ```java
 public interface Collection<E>{
     Iterator<E> iterator();
@@ -59,13 +58,11 @@ public interface Collection<E>{
 
 所有实现Collection 接口的类，都需要实现这些方法
 
-> `java.util.Collection<E>`类实现了该接口
 
 ### Collection 子接口
 
 #### List
-List 是**有序集合**(ordered collection), 元素增加到特定位置。  
-`java.util.List`等类实现了该接口。    
+`java.util.List`接口扩展自`Collection`接口，是**有序集合**(ordered collection), 元素增加到特定位置。  
 访问元素方法：
 - 顺序访问，使用迭代器
 - 随机访问(random access), 根据索引快速访问
@@ -87,9 +84,7 @@ if( c instanceof RandomAccess){
 #### Set
 Set 是**无序不重复集合**。其 add方法不允许添加重复元素。  
 因此它的 `equals`和 `hashCode`方法需要按照元素相等的规则适当定义。  
-`java.util.Set`等类实现了该接口。
 
 #### Queue
 队列也是一种集合。它规定从尾部添加元素，从头部删除元素。内部元素需符合“先进先出”的规则。  
-`java.util.ArrayDeque`等类实现了该接口
 

@@ -5,7 +5,7 @@ Java 类库中的集合，以 Map结尾的类实现了 Map(映射)接口。
 集合读取元素使用`迭代器`，映射需要使用 `V get(K key)`方法。  
 
 ## Map 常用方法
-`java.util.Map` 类实现了 Map接口，常用方法如下：
+`java.util.Map` 接口，常用方法如下：
 - `V get(Object key)`
 - `default V getOrDefault(Object key, V defaultValue)`
 - `V put(K key, V value)`
