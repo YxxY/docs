@@ -1,0 +1,7 @@
+- mvn archetype:generate， 新建，生成项目模板
+- mvn compile，  编译项目，本阶段完成源代码编译
+- mvn test， 测试，测试编译的源代码
+- mvn clean， 清理，会默认清理target文件夹中的数据
+- mvn package， 打包，本阶段根据 pom.xml 中描述的打包配置创建 JAR / WAR 包
+- mvn install， 安装，安装包到本地的仓库，使其被本地的其他工程所依赖
+- mvn deploy， 发布，将构建结果发布到远程仓库

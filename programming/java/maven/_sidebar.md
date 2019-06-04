@@ -1,0 +1,13 @@
+- [⬅️](/programming/java/)
+- **Maven**
+- [简介](programming/java/maven/)
+- [安装](programming/java/maven/install)
+- [配置](programming/java/maven/config)
+- [仓库](programming/java/maven/repo)
+- [POM](programming/java/maven/pom)
+- [生命周期](programming/java/maven/lifecycle)
+- [Maven 插件](programming/java/maven/plugins)
+- [项目骨架](programming/java/maven/archetype)
+- [第三方包](programming/java/maven/third-party-package)
+- [常用命令](programming/java/maven/cmd)
+- [FAQ](programming/java/maven/faq)

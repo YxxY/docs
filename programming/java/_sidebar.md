@@ -11,4 +11,4 @@
     - [接口](programming/java/interface)
     - [并发](programming/java/concurrency/thread)
     - [注解](programming/java/annotation)
-- [Maven](programming/java/maven)
+- [Maven](programming/java/maven/)
