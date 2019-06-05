@@ -1,8 +1,10 @@
 数组在 Java里也是一个对象。  
 
-    In the Java programming language, arrays are objects (§4.3.1), are dynamically created, and may be assigned to variables of type Object (§4.3.2). All methods of class Object may be invoked on an array
+    In the Java programming language, arrays are objects (§4.3.1),   
+    are dynamically created, and may be assigned to variables of type   
+    Object (§4.3.2). All methods of class Object may be invoked on an array
 
-重点关注的是， 数组对象是由 JVM动态生成的，创造它的父类是 Object，因此它也包含 Object类实例的所有方法。 
+重点关注的是， **数组对象是由 JVM动态生成的**，创造它的**父类是 Object**，因此它也包含 Object类实例的所有方法。 
 
 标准类里存在 `java.util.Arrays`类， 提供了很多静态方法可以操作数组对象。
 
@@ -12,7 +14,7 @@ int[] a;
 ```
 
 ## 数组初始化
- ```java
+```java
  //初始化固定长度的数组
  int[] a = new int[100];
 
@@ -27,13 +29,17 @@ int[] a;
 
  //初始化匿名数组
  new int[] {1,2,3,4}
- ```
- - **数组一旦创建就不能再变它的大小**
- - 数组元素类型必须和声明一致，如果不一致会被**强制转换**，无法转换时会抛出异常
+```
+
+- **数组一旦创建就不能再变它的大小**
+- 数组元素类型必须和声明一致，如果不一致会被**强制转换**，无法转换时会抛出异常
 
 ## 数组的赋值和取值
 - 通过下标来赋值和取值
 - 下标越界时会引发异常终止执行
+
+## 数组长度
+对象`length`**属性**，注意不是方法，字符串对象长度对应是 `length()`**方法**
 
 ## 数组循环
 ```java
@@ -49,9 +55,12 @@ for(String element : a){
 }
 ```
 
-## 常用 Arrays静态方法
+## 常用操作数组方法
+由于数组对象的特殊性，它没有单独定为一个类和自定义方法，
+因此数组对象的操作大多方法来自 `java.util.Arrays`类的**静态方法** 
+
 - `Arrays.toString(type[] arr)`  
-    定制字符串打印，比数组对象的 toString方法好用，返回一个包含数组元素的字符串
+    定制字符串打印，比数组对象继承的 toString方法好用，返回一个包含数组元素的字符串
 - `Arrays.copyOf(type[] arr, int len)`
     深拷贝数组。第二个参数是新数组的长度。
 - `Arrays.sort(type[] arr)`  

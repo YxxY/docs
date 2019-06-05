@@ -1,41 +1,38 @@
-接口(interface)技术主要是用来描述类具有什么功能，并不给出每个功能具体的实现。  
+接口(interface)技术主要是用来**描述类具有什么功能**，并不给出每个功能具体的实现。  
 
 ## 接口概念
-接口的概念和抽象类有点像，但不同的是，
-在 Java中，接口不是类，而是对类的一组需求描述。  
-举例来说，Arrays 类的 sort方法承诺可以对对象数组进行排序，但前提是，
-对象所属的类必须实现`Comparable`接口。
+接口的概念和抽象类有点像：
+- 命名方式都是首字母大写的名词
+- 以相同的包命名形式被管理起来，eg: `java.lang.Comparable`接口
+- **都可以当作类型来声明变量**，eg: `Comparable x;` 但接口类型变量**只能引用实现该接口的类对象**
+- 接口可以继承另一个接口
 
-comparable 接口代码如下：
+不同的是，
+- 在 Java中，**接口不是类**，而是对类的一组需求描述。因此它不能使用 `new`关键字来实例化
+- 接口支持多继承
+
+## 定义接口
+以 java.lang.Comparable 接口为例，源代码如下：
 ```java
-public interface Comparable{
-    int compareTo(Object other);
+package java.lang;
+
+public interface Comparable<T> {
+    int compareTo(T var1);
 }
 ```
-也就是说，任何实现 Comparable 接口的类，都要实现 `CompareTo`方法。
-且满足和接口描述的需求一致，即参数为一个对象，返回值为整型。
+使用 `interface`就可以定义一个接口。
+Comparable 接口只包含一个 `CompareTo`方法。  
+它描述的需求是，任何实现 Comparable接口的类，都要**实现** CompareTo方法，
+且满足和接口描述的需求一致，即参数为一个泛型对象，返回值为整型。
 
-- 接口中的**方法默认均为 public**，因此不需要添加访问修饰符
-- 以上接口还有一些附加要求，类似于约定。二者比较时，相等返回0，小于返回负值，大于返回正数
-- 接口包含的方法可能不止一个
-- 接口中没有实例域，Java SE 8 之前，接口中也没有实现方法。  
-    实例域和方法应该由实现接口的类提供
+以上接口还有一些附加要求，类似于约定:
+> 二者比较时，相等返回0，小于返回负值，大于返回正数
+
+实现了该接口的自定义对象数组，就可以使用`Arrays.sort()`方法进行排序
 
 ## 实现接口
-由上文可知，一个自定义类的实例数组对象要想使用 Arrays类的sort方法进行排序，
-就要实现 Comparable 接口，接口的描述也清楚了，就是实现一个 compareTo方法，
-具体实现需要使用 `implements`关键字
-```java
-class Employee implements Comparable{
-    private salary;
-    public int compareTo(Object other){
-        Employee e = (Employee) other;
-        return Double.compare(salary, e.salary);
-    }
-}
-```
-这里以员工的收入举例作为比较值。  
-JAVA SE 5 之后，接口已经改进为泛型。上面的例子还可以进行改进。  
+实现接口使用 `implements`关键字
+
 ```java
 class Employee implements Comparable<Employee>{
     private salary;
@@ -44,17 +41,39 @@ class Employee implements Comparable<Employee>{
     }
 }
 ```
-也可以不使用泛型，使用原始的类型，那就要如上例中使用时进行类型**强制转换**
+这里以员工的收入举例作为比较值（相等返回0，前面小于后面返回负数，否则返回正数）。  
 
-当需要实现多个接口时，使用逗号分隔：  
+> 类不支持多继承，但是可以实现多个接口，当需要实现多个接口时，使用逗号分隔。  
 eg: `class Test implements Comparable, Cloneable`
 
-## 接口特性
-- 接口不是类，这点已反复强调。因此不能使用 `new` 修饰接口
-- 接口也可以继承
-- **可以声明接口类型变量，但变量只能引用实现了该接口的类对象**
+也可以和继承一起的联合写，eg：`class Test extends Person implements xxx`
 
-## 接口默认方法
+## 接口特性
+- 接口不是类
+    - 这点已反复强调因此不能使用 `new` 修饰接口
+    - 同理，接口**不能包括实例域**
+- 接口也可以继承, 且**支持多继承**
+    ```java
+        public interface extends Comparable{
+            //...
+        }
+        //多继承
+        public interface RunnableFuture<V> extends Runnable, Future<V> {
+            void run();
+        }
+    ```
+- 接口中的**方法默认均为 public**，因此不需要添加访问修饰符，也可以加
+- 接口中可以有常量，但常量默认修饰符是 `public static final`
+    ```java
+        public interface Test{
+            double TEST_NUM = 95;
+        }
+    ```
+    - 实现该接口的类也会继承这些静态变量，但容易引起歧义，不是推荐的做法
+- 也可以使用 `instanceof`检查一个对象是否实现了某个接口
+- Java SE 8 之后，接口中可以定义静态方法。但建议再具体的类中实现会好一些。  
+
+### 接口默认方法
 通常情况下，实现接口，就要实现它定义的一个或多个方法。
 但如果提供默认实现，就可以直接复用。  
 使用 `default`方法修饰的接口方法即为默认方法。
@@ -75,8 +94,8 @@ public interface MouseListener{
 
 
 ## 总结
-- Java 的接口类似实现了多继承的效果，但更轻量
-- 接口和实现分离，更加符合接口的语义
-- 接口类型的变量可以引用实现它的类的对象，这是个非常通用的技巧。
+- 接口和实现分离，要想实现某个功能，必须先实现一个接口
+- Java 的接口类似实现了多继承的效果，且接口本身支持多继承
+- 接口类型的变量可以引用实现它的类的对象，这是个非常通用且推荐的写法
 
 

@@ -1,18 +1,17 @@
 Java 字符串就是 Unicode字符序列。 
-Java没有内置字符串类型（非基本类型），而是在标准类库中提供了一个 String类。  
-示例如下：
+Java没有内置字符串类型（非基本类型），而是在标准类库中提供了一个 `java.lang.String`类可以使用。  
 ```java
 String s = "";
 Strng name = "hello world";
 ```
 因此，与基本类型不同的是，每一个双引号括起来的字符串都是 String类的一个实例对象。
 
-由于String 类没有提供修改字符串的方法，所以生成的实例均为**不可变对象**。  
-且String 类为 final类，故也不可继承和重写。
+由于 String类没有提供修改字符串的方法，所以生成的实例均为**不可变对象**。  
+且 `String类为 final类`，故也不可继承和重写。
 
-这种设计额优缺点：
+这种设计的优缺点：
 - 因为不可变，所以拼接和截取字符串都会生成一个新的字符串对象，效率低
-- 可以实现字符串共享，复制字符串时可以共享同一个对象
+- 可以实现字符串共享，复制字符串时可以**共享**同一个对象
 
 ## 常用字符串方法
 - 字符串长度， `length()`方法
@@ -39,6 +38,19 @@ Strng name = "hello world";
     if(a.compareTo(b) == 0)...
     ```
     **使用`==` 比较两个字符串是检测两个是否为同一对象**，如果相同，那么字符串值必然相同
+    ```java
+        String a = "hello";
+        String b = "hello";
+
+        String c = new String("hello");
+        String d = new String("hello");
+
+        System.out.println(a == b);      //true, 字符串对象重用
+        System.out.println(a.equals(b)); //true
+        System.out.println(c == d);      //false，使用 new会产生新的对象
+        System.out.println(c.equals(d)); //true
+        System.out.println(c.equals(a)); //true
+    ```
 - 空串 vs null  
     字符空串和null不是一个概念， **String 变量可以存一个特殊的值，名为`null`**, 表示没有指向任何对象。
     ```java
@@ -47,7 +59,7 @@ Strng name = "hello world";
     
 ## 构造字符串
 
-由于字符串对象的不可变特性，字符串拼接时都会产生新的字符串对象，这样做即浪费空间，效率也不高。    
+由于字符串对象的不可变特性，字符串拼接时都会**产生新的字符串对象**，这样做即浪费空间，效率也不高。    
 针对这类问题，解决方案是使用 `StringBuilder`类来构造字符串。
 ```java
 StringBuilder builder = new StringBuilder();
