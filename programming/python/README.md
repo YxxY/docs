@@ -1,1 +1,1 @@
-Life is short, I suggest using Python
+python 大法好

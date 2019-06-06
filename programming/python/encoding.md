@@ -75,7 +75,7 @@ True
 这个有助于理解Unicode String在内存里的对象形态
 
 ### str to unicode
-str 到 unicode 类型的转换，如同Unicode三明治模型里说表示的  
+str 到 unicode 类型的转换，如同 [Unicode三明治模](/common-sense/char-encoding?id=%E4%B8%89%E6%98%8E%E6%B2%BB%E6%A8%A1%E5%9E%8B)型里说表示的  
 input 根据编码类型decode 成Unicode Strings
 
 ```python2
@@ -161,9 +161,7 @@ str类型和bytes类型的相互转化, 依然采用三明治模型的方法
 
 
 ## 编码声明
-说了这么多，补充一点python文件开头的编码声明的作用
-
-一般在文件开头处，形如  
+编码声明一般用在python 2中，在文件开头处，形如  
 ```python
 # coding=utf-8
 ```
