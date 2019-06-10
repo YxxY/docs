@@ -1,3 +1,4 @@
 - [⬅️](/README)
+- [Git](tools/git/)
 - [Nginx](tools/nginx/)
 - [Docker](tools/docker/)

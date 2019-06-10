@@ -1,7 +1,0 @@
-- [⬅️](/README)
-- [Git](git/)
-- [**Git安装和配置**](git/git-config)
-- **Git原理**
-    - [版本控制](git/git-vcs)
-- **Git基本操作**
-    - [分支操作](git/git-branch)

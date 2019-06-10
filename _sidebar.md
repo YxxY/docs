@@ -3,7 +3,6 @@
 - [Algo](algo/)
 - [Data Structure](data-structure/linked-list)
 - [Programming](programming/)
-- [Database](database/)
-- [Git](git/)
 - [Linux](linux/)
+- [Database](database/)
 - [Tools](tools/)
