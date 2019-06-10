@@ -1,0 +1,6 @@
+- [⬅️](/tools/)
+- [**Nginx**](tools/nginx/)
+- [配置](tools/nginx/config)
+- [基本操作](tools/nginx/op)
+- [静态服务器](tools/nginx/static-server)
+- [负载均衡](tools/nginx/load-balance)
