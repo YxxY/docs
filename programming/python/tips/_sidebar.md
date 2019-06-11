@@ -1,0 +1,2 @@
+- [⬅️](programming/python/)
+- [真假值规则](programming/python/tips/true-value-testing)

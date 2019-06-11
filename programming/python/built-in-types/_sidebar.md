@@ -1,0 +1,4 @@
+- [⬅️](programming/python/)
+- [List](programming/python/built-in-types/list)
+- [tuple](programming/python/built-in-types/tuple)
+- [dict](programming/python/built-in-types/dict)
