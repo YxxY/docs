@@ -2,3 +2,5 @@
 - [内置函数](programming/python/built-in-functions/)
 - **分类**
     - [类型构造器](programming/python/built-in-functions/type-constructor)
+    - [数学方法](programming/python/built-in-functions/math)
+    - [对象操作](programming/python/built-in-functions/obj-manipulate)

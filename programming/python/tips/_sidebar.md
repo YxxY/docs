@@ -1,2 +1,3 @@
 - [⬅️](programming/python/)
 - [真假值规则](programming/python/tips/true-value-testing)
+- [名词概念](programming/python/tips/glossary)
