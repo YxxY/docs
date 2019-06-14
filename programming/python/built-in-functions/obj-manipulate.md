@@ -42,6 +42,12 @@
 `id(obj)`, 返回对象Id, 为一个整型数值, 会在对象的生命周期内保持唯一性.  
 CPython 的该方法实现是返回对象的内存地址.
 
+## iter()
+`iter(object[, sentinel])`, 返回一个迭代器对象.  
+- 如果没有第二个参数, 第一个参数对象必须为可迭代的集合类型, 或者是序列类型. 否则会报 TypeError
+- 如果存在第二个参数, 则参数对象必须为可调用的. 迭代时相当于每次调用对象的 `__next__()`方法, 
+    当返回值和第二个参数相等时, 抛出 `StopIteration`
+
 ## isinstance()
 `isinstance(obj, classinfo)`, 返回布尔类型, 判断对象是否是该类型或子类型的实例.  
 classinfo 必须为一种类型(type), 或者一组(tuple)类型, 否则抛出 TypeError

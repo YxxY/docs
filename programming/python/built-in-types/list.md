@@ -1,5 +1,4 @@
-**`list`** 是python 内置数据类型之一，表示[可变序列](https://docs.python.org/zh-cn/3.7/library/stdtypes.html?highlight=list)(mutable sequences)
-
+**`list`** 是python 内置数据类型之一，表示[可变序列](https://docs.python.org/zh-cn/3.7/library/stdtypes.html?highlight=list)(mutable sequences), 同时也是一种容器(container)对象, 支持存储不同类型的数据
 
 ## 初始化
 构造函数形如：  

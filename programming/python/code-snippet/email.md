@@ -5,8 +5,6 @@ python 发邮件
 #!/usr/bin/env python2
 # coding=utf8
 
-import os
-import datetime
 import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
