@@ -1,6 +1,7 @@
 - [⬅️](programming/python/)
 - [常用模块](programming/python/built-in-module/)
-- [itertool](programming/python/built-in-module/itertools)
+- [itertools](programming/python/built-in-module/itertools)
+- [functools](programming/python/built-in-module/functools)
 - [collections](programming/python/built-in-module/collections)
 - [json](programming/python/built-in-module/json)
 - [config](programming/python/built-in-module/configparser)

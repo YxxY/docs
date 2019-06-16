@@ -1,4 +1,4 @@
-`itertools` 模块提供了很多与迭代器相关, 十分有用的的工具类和函数.  
+`itertools` 模块提供了很多十分有用的迭代器工具类和函数.  
 返回值基本也都为迭代器对象
 
 ## 无限迭代
@@ -92,36 +92,37 @@ def from_iterable(iterable):
             yield i
 ```
 
-### 循环截取迭代器
-`itertools.combinations(iterable, n)`, 返回指定长度 `n`个迭代器元素内容
+### 迭代器过滤
+`itertools.dropwhile(predicate, iterable)`, 丢弃迭代器中的元素, 直到判断条件 `predicate`第一次变成 False结束. eg: `dropwhile(lambda x: x<5, [1,4,6,4,1]) --> 6 4 1`  
 
+与之相反的是 `itertools.takewhile(predicate, iterable)`, 保留迭代器里的内容, 直到判断条件第一次为 False结束. eg: `takewhile(lambda x: x<5, [1,4,6,4,1]) --> 1 4`
 
-### 排列组合迭代内容
-`itertools.permutations(iterable, r=None)`, 如果 r未指定, 相当于全排  
-效果类似于
+`itertools.filterfalse(predicate, iterable)`, 返回判断条件为 False的元素. eg: `filterfalse(lambda x: x%2, range(10)) --> 0 2 4 6 8`
+
+### 迭代器切片
+`itertools.islice()` 实现类似 slice的功能
+- itertools.islice(iterable, stop)¶
+- itertools.islice(iterable, start, stop[, step])
+
 ```python
-def permutations(iterable, r=None):
-    # permutations('ABCD', 2) --> AB AC AD BA BC BD CA CB CD DA DB DC
-    # permutations(range(3)) --> 012 021 102 120 201 210
-    pool = tuple(iterable)
-    n = len(pool)
-    r = n if r is None else r
-    if r > n:
-        return
-    indices = list(range(n))
-    cycles = list(range(n, n-r, -1))
-    yield tuple(pool[i] for i in indices[:r])
-    while n:
-        for i in reversed(range(r)):
-            cycles[i] -= 1
-            if cycles[i] == 0:
-                indices[i:] = indices[i+1:] + indices[i:i+1]
-                cycles[i] = n - i
-            else:
-                j = cycles[i]
-                indices[i], indices[-j] = indices[-j], indices[i]
-                yield tuple(pool[i] for i in indices[:r])
-                break
-        else:
-            return
+islice('ABCDEFG', 2) --> A B
+islice('ABCDEFG', 2, 4) --> C D
+islice('ABCDEFG', 2, None) --> C D E F G
+islice('ABCDEFG', 0, None, 2) --> A C E G
+```
+
+
+### 组合迭代内容
+`itertools.permutations(iterable, r=None)`, 排列组合, 如果 r未指定, 相当于全排  
+eg: 
+```python
+    permutations('ABCD', 2) --> AB AC AD BA BC BD CA CB CD DA DB DC
+    permutations(range(3)) --> 012 021 102 120 201 210
+```
+
+`itertools.product(*iterables, repeat=1)` 笛卡尔和  
+eg:
+```python
+product('ABCD', 'xy') --> Ax Ay Bx By Cx Cy Dx Dy
+product(range(2), repeat=3) --> 000 001 010 011 100 101 110 111
 ```
