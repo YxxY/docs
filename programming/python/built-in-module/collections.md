@@ -61,7 +61,7 @@ Point(x=33, y=22)
 >>> Pixel(11, 22, 128, 255, 0)
 Pixel(x=11, y=22, red=128, green=255, blue=0)
 ```
-#### _fields_defaults
+#### \_fields\_defaults
 返回属性默认值, 可以在初始化时设置对应的默认值, eg:
 ```python
 >>> Account = namedtuple('Account', ['type', 'balance'], defaults=[0])
