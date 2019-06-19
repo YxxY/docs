@@ -19,6 +19,16 @@ constructor | YES | YES | YES | YES
 method | YES | YES | YES | YES
 field | YES | YES | YES | YES
 
+**访问控制范围**:  
+
+target\modifer| public | protected | default | private
+--------------|--------|---------|-----------|--------
+same class    | YES| YES| YES| YES
+same package  | YES| YES| YES|
+sub class(not the same package)| YES | YES
+Other class| YES
+
+
 总结来说，如下：
 - 访问修饰符可以修饰的对象包括：类，嵌套类，构造器，方法，域
 - 访问修饰符不是必要的，因为都可以缺省
@@ -43,7 +53,9 @@ public 表示公开访问权限，表示无限制
 不加任何访问修饰符时，表示默认修饰，那么同一个package的类和方法均可访问
 
 ### protected
-对继承的限制，表示只有继承的子类才有权限访问
+对继承的限制，表示只有继承的子类和同一包中的类才有权限访问
+
+
 
 ## static
 static 关键字可以修饰 method，field（仅成员变量），code block  
