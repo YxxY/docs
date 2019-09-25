@@ -4,7 +4,7 @@ win10 最新版本将默认的 cmd改成了 powershell，但是又不好用，�
 - `regedit` 打开注册表，到 `计算机\HKEY_CLASSES_ROOT\Directory\Background\shell\Powershell`下
 - 修改 `ShowBasedOnVelocityId` 为 `HideBasedOnVelocityId`  
 ![ps-hide](img/ps-hide.png)
-- 同理选中左侧目录上方的 `cmd`，将 `HideBasedOnVelocityId` 改为 `ShowBasedOnVelocityId`
+- 同理选中左侧目录上方的 `cmd`，将 `HideBasedOnVelocityId` 右键**重命名**为 `ShowBasedOnVelocityId`
 
 ?> 如果遇到权限问题，右击左侧目录选择`权限` -> `高级` -> 所有者，点击`更改`, 输入当前使用者邮箱。
 改完后可以给对应 管理员或用户增加`完全控制`权限
