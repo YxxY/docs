@@ -15,7 +15,7 @@
   "author": "xu-li",
   "license": "MIT",
   "dependencies": {
-    "docsify": "^4.8.6",
+    "docsify": "^4.12.0",
     "docsify-copy-code": "^2.0.2",
     "docsify-pagination": "^2.3.4",
     "finalhandler": "^1.1.1",
